@@ -1,0 +1,10 @@
+name: CustomScoreboard
+version: 1.0
+main: com.example.customscoreboard.Main
+author: Mikaeel
+description: Custom Scoreboard Plugin for Spigot 1.8.8
+commands:
+  customboard:
+    description: Main plugin command
+    aliases: [cb, csb]
+    permission: customscoreboard.admin
