@@ -1,0 +1,8 @@
+scoreboard:
+  title: "&e&lServer Man"
+  lines:
+    - "&7--------------------"
+    - "&fPlayer: &a%player%"
+    - ""
+    - "&fKhosh omadi be server!"
+    - "&7--------------------"
