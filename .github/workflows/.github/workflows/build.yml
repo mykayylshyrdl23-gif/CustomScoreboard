@@ -1,0 +1,36 @@
+name: Build Plugin
+
+# زمان اجرا: با هر پوش یا پول‌ریکوئست روی برنچ‌های main یا master
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # مرحله ۱: دانلود فایل‌های پروژه داخل ماشین مجازی
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    # مرحله ۲: نصب جاوا ۸ (مخصوص نسخه 1.8.8 اسپایگات) و فعال‌سازی کش Maven
+    - name: Set up JDK 8
+      uses: actions/setup-java@v4
+      with:
+        java-version: '8'
+        distribution: 'temurin'
+        cache: maven
+
+    # مرحله ۳: کامپایل کد و بیلد فایل JAR با ماون
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
+
+    # مرحله ۴: ذخیره و آپلود فایل JAR ساخته‌شده در بخش Artifacts
+    - name: Upload Plugin Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Compiled-Plugin
+        path: target/*.jar
